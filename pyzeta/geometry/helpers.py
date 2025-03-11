@@ -91,7 +91,7 @@ def HtoD(z: tScal) -> complex:
     """
     res: complex
     cT = CAYLEY
-    if abs(z) == np.infty:
+    if abs(z) == np.inf: #changed here np.infty to np.inf
         res = cT[0, 0] / cT[1, 0]
     else:
         res = (cT[0, 0] * z + cT[0, 1]) / (cT[1, 0] * z + cT[1, 1])
@@ -118,7 +118,7 @@ def DtoH(z: tScal) -> complex:
     res: complex
     icT = INV_CAYLEY
     if z == -(icT[1, 0] / icT[1, 1]):
-        res = np.infty
+        res = np.inf #changed here np.infty to np.inf
     else:
         res = (icT[0, 0] * z + icT[0, 1]) / (icT[1, 0] * z + icT[1, 1])
 

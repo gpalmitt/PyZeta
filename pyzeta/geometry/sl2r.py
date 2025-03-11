@@ -136,23 +136,23 @@ class SL2R:
                 invalidIdx = tuple(np.argwhere(np.imag(z) < 0.0)[0])
                 raise InvalidHalfplanePoint(z[invalidIdx])
             res = np.zeros_like(z)
-            mask = z != np.infty
+            mask = z != np.inf #changed here np.infty to np.inf
 
             res[mask] = (a * z[mask] + b) / (c * z[mask] + d)
             if c != 0:
                 res[~mask] = a / c
             else:
-                res[~mask] = np.infty
+                res[~mask] = np.inf #changed here np.infty to np.inf
             return res
 
         z = stabilize(z, model="H")  # improve numerical stability
         if np.imag(z) < 0.0:
             raise InvalidHalfplanePoint(z)
-        if z != np.infty:
+        if z != np.inf: #changed here np.infty to np.inf
             return (a * z + b) / (c * z + d)
         if c != 0:
             return a / c
-        return np.infty
+        return np.inf #changed here np.infty to np.inf
 
     def __len__(self) -> float:
         r"""
@@ -227,9 +227,9 @@ class SL2R:
 
         if c == 0:
             if not isclose(d, a):
-                self.fixPt = (b / (d - a), np.infty)
+                self.fixPt = (b / (d - a), np.inf) #changed here np.infty to np.inf
             else:
-                self.fixPt = (np.infty,)
+                self.fixPt = (np.inf,) #changed here np.infty to np.inf
             return self.fixPt
 
         # distinguish parabolic, elliptic, hyperbolic using trace
@@ -298,7 +298,7 @@ class SL2R:
         )
 
         ax.scatter(x, y, **kwargs)
-        if np.infty in x:
+        if np.inf in x: #changed here np.infty to np.inf
             ax.scatter(0.5, 1, **kwargs, transform=ax.transAxes)
             ax.text(
                 0.5,

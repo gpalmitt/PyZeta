@@ -69,17 +69,17 @@ class Geodesic:
 
         self._model = model
 
-        if z1 == np.infty:
-            self.m = self.r = self.u = np.infty
+        if z1 == np.inf: #changed here np.infty to np.inf
+            self.m = self.r = self.u = np.inf #changed here np.infty to np.inf
             self.t = z2.real
-        elif z2 == np.infty:
-            self.m = self.r = self.u = np.infty
+        elif z2 == np.inf: #changed here np.infty to np.inf
+            self.m = self.r = self.u = np.inf #changed here np.infty to np.inf
             self.t = z1.real
         else:
             x1, y1 = z1.real, z1.imag
             x2, y2 = z2.real, z2.imag
             if x1 == x2:
-                self.m = self.r = self.u = np.infty
+                self.m = self.r = self.u = np.inf #changed here np.infty to np.inf
                 self.t = x1
             else:
                 self.m = (
@@ -94,7 +94,7 @@ class Geodesic:
         phiInt = abs(phiT - phiU)
 
         if abs(phiInt - np.pi) < 1e-4:
-            self.md, self.rd = np.infty, np.infty
+            self.md, self.rd = np.inf, np.inf #changed here np.infty to np.inf
         else:
             phiMean = (phiT + phiU) / 2.0
             if abs(phiMean - phiT) > np.pi / 2.0:
@@ -170,9 +170,9 @@ class Geodesic:
         markerKwargs["clip_on"] = kwargs.get("clip_on", False)
 
         # set maximal imag part on 'H' depending on default and circle size
-        inftyMax = 1.2 * self.r if self.r != np.infty else inftyMax
+        inftyMax = 1.2 * self.r if self.r != np.inf else inftyMax #changed here np.infty to np.inf
         # set center of real part on 'H' depending on circle position
-        center = self.t if self.r == np.infty else self.m
+        center = self.t if self.r == np.inf else self.m #changed here np.infty to np.inf
 
         if ax is None:
             _, ax = plt.subplots(tight_layout=True)
@@ -190,7 +190,7 @@ class Geodesic:
         )
 
         if self.model == "H":
-            if self.r == np.infty:
+            if self.r == np.inf: #changed here np.infty to np.inf
                 ax.plot(
                     [self.t.real, self.u.real],
                     [self.t.imag, self.u.imag],
@@ -289,16 +289,16 @@ class Geodesic:
 
         model = self.model
 
-        if self.r == np.infty:
-            if other.r == np.infty:
-                xx, yy = np.infty, np.infty
+        if self.r == np.inf: #changed here np.infty to np.inf
+            if other.r == np.inf: #changed here np.infty to np.inf
+                xx, yy = np.inf, np.inf #changed here np.infty to np.inf
             elif self.t <= other.u:
                 xx = self.t
                 yy = np.sqrt(other.r**2 - (other.m - xx) ** 2)
             else:
                 return None
         else:
-            if other.r == np.infty:
+            if other.r == np.inf: #changed here np.infty to np.inf
                 xx = other.t
                 yy = np.sqrt(self.r**2 - (self.m - xx) ** 2)
             elif (
@@ -316,7 +316,7 @@ class Geodesic:
                 return None
 
         if model == "D":
-            if xx == np.infty:
+            if xx == np.inf: #changed here np.infty to np.inf
                 xx = -1.0
                 yy = 0.0
             else:
@@ -342,7 +342,7 @@ class Geodesic:
         a1, b1 = sorted((self.t, other.t))
         a2, b2 = sorted((self.u, other.u))
 
-        if b2 == np.infty:
+        if b2 == np.inf: #changed here np.infty to np.inf
             raise NotImplementedError(
                 "Computation of reflection axis of "
                 + "geodesics going to infty not "
@@ -350,7 +350,7 @@ class Geodesic:
             )
 
         if abs(a1 - a2 + b2 - b1) < 1e-9:
-            c1 = np.infty
+            c1 = np.inf #changed here np.infty to np.inf
             c2 = 0.5 * (a1 + b2)
         else:
             c1 = (

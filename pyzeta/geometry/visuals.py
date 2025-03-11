@@ -80,9 +80,9 @@ def getReflecTrafo(geo: Geodesic) -> tSym:
     """
     model = geo.model
 
-    if geo.u == np.infty:
+    if geo.u == np.inf: #changed here np.infty to np.inf
         g = np.array([[-1, 2 * geo.t], [0, 1]])
-    elif geo.t == np.infty:
+    elif geo.t == np.inf: #changed here np.infty to np.inf
         g = np.array([[-1, 2 * geo.u], [0, 1]])
     else:
         g = np.array(
@@ -134,9 +134,9 @@ def hypDist(z1: complex, z2: complex, model: str = "H") -> float:
     if z1.imag == 0 or z2.imag == 0:
         if z1 == z2:
             return 0.0
-        return np.infty
-    if abs(z1) == np.infty or abs(z2) == np.infty:
-        return np.infty
+        return np.inf #changed here np.infty to np.inf
+    if abs(z1) == np.inf or abs(z2) == np.inf: #changed here np.infty to np.inf
+        return np.inf #changed here np.infty to np.inf
 
     distance = 2.0 * np.arcsinh(
         abs(z1 - z2) / (2 * np.sqrt(z1.imag * z2.imag))
@@ -163,7 +163,7 @@ def horoDist(z: tVec, xi: tScal, model: str = "H") -> NDArray[np.float64]:
             raise ValueError(f"{xi} is not a valid boundary pt of {model}!")
         # convert from 'H' to 'D' for actual calculation
         cT = CAYLEY
-        idx = z == np.infty
+        idx = z == np.inf #changed here np.infty to np.inf
         z[idx] = cT[0, 0] / cT[1, 0]
         z[~idx] = (cT[0, 0] * z[~idx] + cT[0, 1]) / (
             cT[1, 0] * z[~idx] + cT[1, 1]
@@ -236,7 +236,7 @@ def getMiddlePt(z1: tScal, z2: tScal, model: str = "H") -> tScal:
         res = z2
     else:
         geo = Geodesic(z1, z2, model="H")
-        if geo.r == np.infty:
+        if geo.r == np.inf: #changed here np.infty to np.inf
             d0 = hypDist(z1, z2)
             # root_scalar returns RootResults object; need the attribute root
             xMid = root_scalar(
